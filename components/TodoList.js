@@ -4,16 +4,25 @@ import axios from 'axios';
 
 export default class TodoList extends Component {
 
-  state = {
-    todos: [],
-  };
+    constructor(props){
+      super(props);
+
+      state = {
+        todos: [],
+      };
+    }
 
   componentDidMount(){
-    axios.get('https://xgb-todoapi.herokuapp.com/api/todos')
-    .then(res =>{
-      this.setState({todos: res.data})
+    axios
+    .get('https://xgb-todoapi.herokuapp.com/api/todos')
+    .then(response => {
+      const { todos } = response.data;
+      this.setState({
+        todos: todos
+      });
     })
   }
+
   render() {
     return (
       <ScrollView>
