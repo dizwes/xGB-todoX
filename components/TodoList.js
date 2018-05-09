@@ -2,41 +2,23 @@ import React, { Component }  from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import axios from 'axios';
 
-export default class TodoList extends Component {
+const TodoList = props => {
+  const { todos } = props;
+  const todoList = todos.map(todo =>{
+    return <Text style={styles.todoText}> key=>{todo._id}{todo.description}</Text>
+  })
 
-    constructor(props){
-      super(props);
-
-      state = {
-        todos: [],
-      };
-    }
-
-  componentDidMount(){
-    axios
-    .get('https://xgb-todoapi.herokuapp.com/api/todos')
-    .then(response => {
-      const { todos } = response.data;
-      this.setState({
-        todos: todos
-      });
-    })
-  }
-
-  render() {
-    return (
+    return(
       <ScrollView>
         <View style={styles.todoListContainer}>}>
-          {this.state.todos.map(todo=>
-            <View style={styles.todoItem}>
-            <Text style={styles.todoText}>{this.todo.address}</Text>
+          <View style={styles.todoItem}>
+            {todoList}
           </View>
-          )}
         </View>
       </ScrollView>
-    );
-  }
+    )
 }
+
 const styles = StyleSheet.create({
  todoListContainer:{
     backgroundColor: '#000',
@@ -53,3 +35,5 @@ const styles = StyleSheet.create({
 
   }
 })
+
+export default TodoList;
