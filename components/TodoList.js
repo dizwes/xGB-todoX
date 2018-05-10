@@ -3,16 +3,20 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-nati
 
 import { connect } from 'react-redux';
 import TodoListItem from './TodoListItem';
-import {  toggleTodo } from '../actions';
+import {  toggleTodo, setEditingTodo } from '../actions';
 
 
-const todoList = ({ todos, dispatchToggleTodo }) => (
+const todoList = ({
+      todos,
+      dispatchToggleTodo,
+      dispatchSetEditingTodo }) => (
       <ScrollView style={styles.todoListContainer}>
           {todos.map( todo =>
             <TodoListItem
               key={todo.id}
               todo={todo}
               onPressTodo={() => dispatchToggleTodo(todo.id)}
+              onLongPressTodo={() => dispatchSetEditingTodo(todo)}
               />)}
       </ScrollView>
 )
@@ -21,7 +25,7 @@ const styles = StyleSheet.create({
  todoListContainer:{
     backgroundColor: '#000',
     paddingTop: 15,
-    paddingHorizontal: 5,
+    paddingHorizontal: 20,
   },
   todoItem:{
     borderBottomColor: 'rgba(0,255,252,.1)',
@@ -38,4 +42,6 @@ const mapStateToProps = state => {
 }
 export default connect(
   mapStateToProps,
-  { dispatchToggleTodo: toggleTodo })(todoList);
+  { dispatchToggleTodo: toggleTodo,
+    dispatchSetEditingTodo: setEditingTodo
+  })(todoList);

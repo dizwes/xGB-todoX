@@ -5,28 +5,22 @@ import { connect } from 'react-redux';
 import TodoList from '../components/TodoList'
 import Input from '../components/Input'
 import { Button } from 'react-native-elements';
-import { addTodo } from '../actions';
+import { addTodo, updateTodo, setTodoText } from '../actions';
 
 class TodoForm extends Component {
-  constructor(props){
-    super(props);
-    this.state ={
-      text: ''
-    };
-  }
-  onChangeText(text){
-    this.setState({
-      text
-    });
-  }
+    onChangeText(text){
+      this.props.dispatchSetTodoText(text)
+    }
     onPress(){
-      this.props.dispatchAddTodo(this.state.text);
-      this.setState({ text: ''});
+      const { todo } = this.props;
+      if(todo.id)
+        return this.props.dispatchUpdateTodo(todo);
+        const { text } = todo;
+        this.props.dispatchAddTodo(text);
     }
 
-
   render() {
-    const { text } = this.state;
+    const { text, id } = this.props.todo;
     return (
       <ScrollView>
         <View style={styles.formContainer}>
@@ -46,7 +40,7 @@ class TodoForm extends Component {
                 borderRadius: 3,
                 color:'#000'
               }}
-              title="Add"
+              title={id? "Salvar" : "Add"}
               onPress={() => this.onPress()}/>
           </View>
         </View>
@@ -64,7 +58,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#000',
   },
   inputContainer:{
-    flex: 6,
+    flex: 4,
     paddingLeft: 20,
   },
   buttonContainer:{
@@ -72,12 +66,16 @@ const styles = StyleSheet.create({
   },
 })
 
-//const mapDispatchToProps = dispatch => {
-//  return{
-//    dispatchAddTodo: text => dispatch(addTodo(text))
-//  }
-//}
+const mapStateToProps = state => {
+  return{
+    todo: state.editingTodo
+  }
+}
 
-export default connect(null, {
-  dispatchAddTodo: addTodo
-})(TodoForm);
+export default connect(mapStateToProps,
+  {
+  dispatchAddTodo: addTodo,
+  dispatchSetTodoText: setTodoText,
+  dispatchUpdateTodo: updateTodo
+  })
+  (TodoForm);

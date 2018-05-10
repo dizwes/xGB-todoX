@@ -3,8 +3,10 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { connect } from 'react-redux';
 
-const TodoListItem = ({ todo, onPressTodo }) => (
-    <TouchableOpacity onPress={onPressTodo}>
+const TodoListItem = ({ todo, onPressTodo, onLongPressTodo }) => (
+    <TouchableOpacity
+    onPress={onPressTodo}
+    onLongPress={onLongPressTodo}>
       <View style={styles.todoItem}>
           <Text style={[
             styles.todoText,
