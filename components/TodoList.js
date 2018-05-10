@@ -1,23 +1,21 @@
 import React, { Component }  from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import axios from 'axios';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 
-const TodoList = props => {
-  const { todos } = props;
-  const todoList = todos.map(todo =>{
-    return <Text style={styles.todoText}> key=>{todo._id}{todo.description}</Text>
-  })
+import { connect } from 'react-redux';
+import TodoListItem from './TodoListItem';
+import {  toggleTodo } from '../actions';
 
-    return(
-      <ScrollView>
-        <View style={styles.todoListContainer}>}>
-          <View style={styles.todoItem}>
-            {todoList}
-          </View>
-        </View>
+
+const todoList = ({ todos, dispatchToggleTodo }) => (
+      <ScrollView style={styles.todoListContainer}>
+          {todos.map( todo =>
+            <TodoListItem
+              key={todo.id}
+              todo={todo}
+              onPressTodo={() => dispatchToggleTodo(todo.id)}
+              />)}
       </ScrollView>
-    )
-}
+)
 
 const styles = StyleSheet.create({
  todoListContainer:{
@@ -32,8 +30,12 @@ const styles = StyleSheet.create({
   },
   todoText:{
     color:'#FFF',
-
-  }
+  },
 })
-
-export default TodoList;
+const mapStateToProps = state => {
+  const { todos } = state;
+  return { todos };
+}
+export default connect(
+  mapStateToProps,
+  { dispatchToggleTodo: toggleTodo })(todoList);

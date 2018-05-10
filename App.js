@@ -6,8 +6,9 @@ import { NavigationActions } from 'react-navigation';
 import Home from './pages/Home'
 import Instructions from './pages/Instructions'
 import Todos from './pages/Todos'
+import MapViewer from './pages/MapViewer'
 import Carousel from './components/Carousel'
-import MapView from './components/MapView'
+
 
 export default StackNavigator({
   Home: {
@@ -54,8 +55,8 @@ export default StackNavigator({
       },
     },
   },
-  MapView: {
-    screen: MapView,
+  MapViewer: {
+    screen: MapViewer,
     navigationOptions:{
       title: 'ToDo X',
       headerStyle: {

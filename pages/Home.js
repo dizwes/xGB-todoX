@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Button, StatusBar, StyleSheet, Image } from 'react-native';
+import { Button } from 'react-native-elements';
+import { View, Text, StatusBar, StyleSheet, Image } from 'react-native';
 
 import Logo from '../components/Logo'
 
@@ -25,9 +26,16 @@ export default class Home extends Component {
         <View style={styles.content}>
           <View style={styles.Button}>
             <Button
+              buttonStyle={{
+                backgroundColor: "rgba(0, 0, 0, 1)",
+                width: 200,
+                height: 45,
+                borderColor: "rgba(0, 255, 252, 1)",
+                borderWidth: 1,
+                borderRadius: 5,
+                color:'#000'
+              }}
               title="Acessar"
-              color='#000'
-              backgroundColor="#00fffc"
               onPress={() =>{
               this.props.navigation.navigate('Instructions');
               }}
@@ -75,13 +83,4 @@ const styles = StyleSheet.create({
     height: '70%',
     marginTop: 100,
   },
-  Button:{
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 300,
-    height: 40,
-    backgroundColor:'#00fffc',
-    borderRadius: 3,
-  }
-
 })

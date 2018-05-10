@@ -6,7 +6,7 @@ export default class InstructionUm extends Component {
   render() {
     return(
       <View style={styles.titleContainer}>
-        <TypeWriter style={styles.title} typing={1}>Adicione uma tarefa com um simples toque! </TypeWriter>
+        <TypeWriter style={styles.title} typing={1}>Adicione suas tarefas de forma rápida e simples! </TypeWriter>
       </View>
     )
   }

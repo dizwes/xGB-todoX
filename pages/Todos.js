@@ -1,16 +1,25 @@
 import React, { Component }  from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import CarouselSlider from '../components/Carousel';
+import { Provider } from 'react-redux';
 
-import CarouselSlider from '../components/Carousel'
-import TodoForm from '../components/TodoForm'
+import TodoForm from '../components/TodoForm';
 
+  import { createStore} from 'redux';
+  import rootReducer from '../redurcers';
+
+  import devToolsEnhancer from 'remote-redux-devtools';
+
+const store = createStore(rootReducer, devToolsEnhancer())
 
 export default class Todos extends Component {
   render() {
     return (
-      <View style={styles.todoContainer}>}>
-        <TodoForm />
-      </View>
+      <Provider store={store}>
+        <View style={styles.todoContainer}>}>
+          <TodoForm />
+        </View>
+      </Provider>
     );
   }
 }

@@ -16,7 +16,7 @@ export default class CarouselSlider extends Component {
     return (
     <Carousel
       animate={false}
-      indicatorColor="#00fffc"
+      indicatorColor="(Platform.OS === íos’) ? rgba(0, 255, 252, 1) : rgba(0,0,0,1)"
       indicatorSize={20}
       inactiveIndicatorColor="#FFF"
       indicatorOffset={525}
