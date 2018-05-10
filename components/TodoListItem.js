@@ -1,8 +1,9 @@
 import React, { Component }  from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 import { connect } from 'react-redux';
 
+const mapIcon = require('../assets/map-icon.png');
 const TodoListItem = ({ todo, onPressTodo, onLongPressTodo }) => (
     <TouchableOpacity
     onPress={onPressTodo}
@@ -15,6 +16,11 @@ const TodoListItem = ({ todo, onPressTodo, onLongPressTodo }) => (
           >
             {todo.text}
           </Text>
+          <Image
+            style={styles.logotipo}
+            source={mapIcon}
+            style={{width: 25, height: 25}}
+          />
       </View>
     </TouchableOpacity>
 )
@@ -24,6 +30,9 @@ const styles = StyleSheet.create({
     borderBottomColor: 'rgba(0,255,252,.1)',
     borderBottomWidth: 0.3,
     paddingVertical: 10,
+    flexDirection: 'row',
+    justifyContent:'space-between',
+    alignItems: 'center',
   },
   todoText:{
     color:'#FFF',
